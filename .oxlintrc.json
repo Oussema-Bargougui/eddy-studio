@@ -1,0 +1,22 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript", "oxc", "jsx-a11y", "import"],
+  "categories": { "correctness": "error", "suspicious": "warn" },
+  "rules": {
+    "max-lines": ["error", { "max": 250, "skipBlankLines": true, "skipComments": true }],
+    "react/rules-of-hooks": "error",
+    "react/react-in-jsx-scope": "off",
+    "react/exhaustive-deps": "warn",
+    "react/only-export-components": ["warn", { "allowConstantExport": true, "allowExportNames": ["Route"] }],
+    "react/no-unstable-nested-components": ["warn", { "allowAsProps": true }],
+    "import/no-unassigned-import": "off",
+    "no-underscore-dangle": ["warn", { "allow": ["__EDDY_CONFIG__"] }],
+    "import/no-named-as-default-member": "off",
+    "typescript/no-explicit-any": "error",
+    "import/no-cycle": "error",
+    "jsx-a11y/alt-text": "error",
+    "jsx-a11y/anchor-is-valid": "error",
+    "jsx-a11y/label-has-associated-control": "error"
+  },
+  "ignorePatterns": ["src/routeTree.gen.ts", "dist", "node_modules"]
+}

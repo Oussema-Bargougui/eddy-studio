@@ -1,0 +1,91 @@
+@import 'tailwindcss';
+
+/* Eddy Studio design tokens — the board's "Langage visuel", one source of truth. */
+@theme {
+  --color-cream: #f5f0e6;
+  --color-paper: #fffdf8;
+  --color-sand: #efe8da;
+  --color-parchment: #fbf7ee;
+  --color-line: #e3d9c6;
+  --color-line-strong: #d9cdb5;
+  --color-ink: #1b2340;
+  --color-ink-soft: #5e6273;
+  --color-ink-faint: #9aa0b4;
+  --color-night: #1b2340;
+  --color-night-soft: #26305a;
+  --color-night-line: #3a4466;
+  --color-on-night: #f5f0e6;
+  --color-on-night-soft: #c9ccE0;
+  --color-brand: #5b13b4;
+  --color-brand-deep: #3f0c80;
+  --color-brand-soft: #f3ecfc;
+  --color-brand-tint: #e8ddf7;
+  --color-clay: #c24e1c;
+  --color-gold: #f2b66d;
+  --color-ok: #2f7d4f;
+  --color-ok-soft: #e6f2ea;
+  --color-bad: #b42318;
+  --color-bad-deep: #8f1a12;
+  --color-bad-soft: #f8e3df;
+  --color-warn: #b26a00;
+  --color-warn-soft: #fbebd2;
+
+  --font-display: 'Fraunces Variable', Georgia, serif;
+  --font-sans: 'Inter Variable', system-ui, sans-serif;
+  --font-hand: 'Caveat', cursive;
+
+  --radius-card: 24px;
+  --radius-panel: 28px;
+  --shadow-card: 0 1px 0 var(--color-line), 0 18px 40px -28px rgb(27 35 64 / 0.35);
+  --shadow-float: 0 40px 80px -30px rgb(27 35 64 / 0.45);
+  --ease-out-soft: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@layer base {
+  html {
+    background: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    margin: 0;
+    min-height: 100dvh;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+  button:not(:disabled),
+  [role='button'] {
+    cursor: pointer;
+  }
+}
+
+/* Group titles of the command bar (cmdk renders them). */
+[cmdk-group-heading] {
+  padding: 12px 12px 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@utility animate-pulse-dot {
+  animation: pulse-dot 2.4s infinite;
+}

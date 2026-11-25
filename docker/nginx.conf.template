@@ -1,0 +1,46 @@
+# Eddy Studio — static app served by nginx.
+# ${EDUCAP_ORIGINS} is filled in at container start (official nginx template step).
+# add_header lines are repeated per location on purpose: nginx drops the
+# server-level ones as soon as a location declares its own.
+
+server {
+    listen 80;
+    server_name _;
+    root /usr/share/nginx/html;
+    index index.html;
+    server_tokens off;
+
+    gzip on;
+    gzip_min_length 1024;
+    gzip_types text/css application/javascript application/json image/svg+xml;
+
+    location = /healthz {
+        access_log off;
+        default_type text/plain;
+        return 200 "ok\n";
+    }
+
+    # Hashed build files: cached for a year, they change name when they change.
+    location /assets/ {
+        add_header Cache-Control "public, max-age=31536000, immutable" always;
+        add_header Content-Security-Policy "frame-ancestors 'self' ${EDUCAP_ORIGINS}" always;
+        add_header X-Content-Type-Options "nosniff" always;
+        try_files $uri =404;
+    }
+
+    # Runtime settings: always fresh.
+    location = /config.js {
+        add_header Cache-Control "no-store" always;
+        add_header X-Content-Type-Options "nosniff" always;
+    }
+
+    # The app: every route falls back to index.html (client-side routing).
+    location / {
+        add_header Cache-Control "no-cache" always;
+        # Only EduCap (and Eddy Studio itself) may show this app in a frame.
+        add_header Content-Security-Policy "frame-ancestors 'self' ${EDUCAP_ORIGINS}" always;
+        add_header X-Content-Type-Options "nosniff" always;
+        add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+        try_files $uri $uri/ /index.html;
+    }
+}

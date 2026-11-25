@@ -1,0 +1,13 @@
+# Eddy Studio in Docker.
+#   docker compose up --build        → http://localhost:5180
+# Port and allowed EduCap addresses can be changed without rebuilding:
+#   EDDY_STUDIO_PORT=8080 EDUCAP_ORIGINS="https://dev.educap.io" docker compose up
+services:
+  eddy-studio:
+    build: .
+    image: eddy-studio:local
+    ports:
+      - "${EDDY_STUDIO_PORT:-5180}:80"
+    environment:
+      EDUCAP_ORIGINS: "${EDUCAP_ORIGINS:-http://localhost:3002 http://localhost:3001}"
+    restart: unless-stopped

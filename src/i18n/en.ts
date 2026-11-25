@@ -1,0 +1,83 @@
+import type { fr } from './fr'
+
+type Shape<T> = { [K in keyof T]: T[K] extends string ? string : Shape<T[K]> }
+
+/** Interface text in English; same keys as French, checked by the type. */
+export const en: Shape<typeof fr> = {
+  nav: {
+    label: 'Main navigation',
+    briefing: 'Briefing',
+    explorer: 'Explore',
+    scenarios: 'Scenarios',
+    journal: 'Journal',
+  },
+  shell: {
+    command: 'Search, ask, launch…',
+    profile: "{{name}}'s profile",
+    askEddy: 'Ask Eddy',
+    readAt: 'Read from EduCap {{minutes}} min ago',
+    replay: 'Replay the animation',
+  },
+  common: {
+    why: 'Why?',
+    source: 'Source: {{source}}',
+    back: '← Back',
+    cancel: 'Cancel',
+    close: 'Close',
+    start: 'Start →',
+    loading: 'Reading the data…',
+    error: 'EduCap did not answer. Try again in a moment.',
+    retry: 'Retry',
+  },
+  briefing: {
+    todosTitle: 'To handle, by priority',
+    dropsTitle: 'Classes slipping',
+    collectionTitle: 'Collection pace',
+    todayTitle: 'Today',
+    seeAllClasses: 'See the {{count}} classes →',
+    stableClasses: '{{count}} other classes stable',
+  },
+  explore: {
+    period: 'Period',
+    level: 'Level',
+    allLevels: 'All levels',
+    seeAll: 'See the {{count}} classes',
+    collapse: 'Collapse',
+    themeSoon: 'This theme is coming soon.',
+  },
+  eddy: {
+    title: 'Eddy',
+    subtitle: 'Reads EduCap · changes nothing',
+    history: 'Past conversations',
+    placeholder: 'Ask a question about your school…',
+    send: 'Send',
+    sources: 'Sources:',
+    toAct: 'To act',
+    openScenarios: 'Open scenarios',
+    thinking: 'Eddy is reading the data…',
+  },
+  command: {
+    label: 'Command bar',
+    placeholder: 'Find a class, a scenario, or ask a question…',
+    scenarios: 'Scenarios',
+    ask: 'Ask Eddy',
+    goTo: 'Go to',
+    empty: 'Nothing found. Press Enter to ask Eddy.',
+    hints: '↑↓ choose · Enter open · Esc close',
+  },
+  scenarios: {
+    title: 'What do you want to sort out today?',
+    lead: 'Each scenario opens on a guided form, step by step. Eddy pre-fills what it finds in EduCap, you check, then you confirm.',
+    describe: 'Describe the situation',
+    describePlaceholder: 'e.g. a teacher sick on Thursday, remind the families…',
+    steps: '{{count}} steps · ≈ {{saves}}',
+    simpleTitle: 'Simple operations',
+    simpleLead: '{{count}} one-step actions, for precise cases',
+    quit: '× Quit',
+    catalogue: '← Catalogue',
+    stepOf: 'Scenario · step {{step}} of {{total}}',
+    preview: 'What will be written to EduCap',
+    undoable: 'The absence and the replacements can be removed from the Journal. Nothing is sent before “Confirm”.',
+    soon: 'This scenario is being prepared.',
+  },
+}
